@@ -3,9 +3,10 @@ import LoginScreen from './screens/LoginScreen';
 import SplashScreen from './screens/SplashScreen';
 import HomeScreen from './screens/HomeScreen';
 import ProfileDashboard from './screens/ProfileDashboard';
+import SosScreen from './screens/SosScreen';
 
 export default function App() {
-  const [currentScreen, setCurrentScreen] = useState('login'); // start flow at login
+  const [currentScreen, setCurrentScreen] = useState('login');
 
   return (
     <>
@@ -25,13 +26,23 @@ export default function App() {
           onPlayGames={() => alert("Play Games!")}
           onLearnGrow={() => alert("Learn Hub!")}
           onProfile={() => setCurrentScreen('profile')}
-          onSOS={() => alert("SOS sent!")}
+          onSOS={() => setCurrentScreen('sos')}
         />
       )}
       {currentScreen === 'profile' && (
         <ProfileDashboard
           onHome={() => setCurrentScreen('home')}
           onLogout={() => setCurrentScreen('login')}
+          onSOS={() => setCurrentScreen('sos')}
+        />
+      )}
+      {currentScreen === 'sos' && (
+        <SosScreen
+          onHome={() => setCurrentScreen('home')}
+          onQuests={() => alert("Quests!")}
+          onGames={() => alert("Games!")}
+          onLearn={() => alert("Learn!")}
+          onProfile={() => setCurrentScreen('profile')}
         />
       )}
     </>

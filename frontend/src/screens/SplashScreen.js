@@ -9,7 +9,7 @@ export default function SplashScreen({ onProceed }) {
   return (
     <div style={styles.container}>
       <div style={styles.logoContainer}>
-        <img src="src/assets/logo.svg" alt="StepSafe" style={styles.logo} />
+        <img src="logo.png" alt="StepSafe" style={styles.logo} />
         <h1 style={styles.title}>StepSafe</h1>
         <p style={styles.tagline}>Your Safety Journey Starts Here</p>
       </div>
@@ -39,7 +39,7 @@ const styles = {
     width: 120,
     height: 120,
     marginBottom: 24,
-    borderRadius: '50%',
+  
     boxShadow: '0 8px 32px rgba(0,0,0,0.3)'
   },
   title: {

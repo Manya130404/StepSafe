@@ -1,0 +1,159 @@
+/* Add these styles to your CSS file */
+.profile-container {
+  max-width: 550px;
+  margin: 0 auto;
+  width: 96vw;
+  padding: 24px 0 24px 0;
+}
+.profile-header {
+  background: linear-gradient(90deg, #22264A 70%, #252856);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  border-radius: 22px;
+  padding: 18px 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 18px #0004;
+}
+.profile-avatar {
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  border: 3.5px solid #7C3AED;
+  background: #232946;
+}
+.profile-nametexts {
+  flex: 1;
+}
+.profile-username {
+  color: #B8AFFF;
+  font-weight: 700;
+  font-size: 18px;
+}
+.profile-name {
+  color: #FFD600;
+  font-weight: 700;
+  font-size: 27px;
+  margin-bottom: 6px;
+}
+.profile-points {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #FFD600;
+  font-weight: 600;
+  font-size: 18px;
+}
+.profile-section {
+  background: #23253c;
+  border-radius: 18px;
+  padding: 20px 16px 14px 16px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 10px #0003;
+}
+.profile-section-title {
+  color: #B8AFFF;
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+.profile-leaderboard {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.leaderboard-item {
+  display: flex;
+  align-items: center;
+  background: #191D2E;
+  border-radius: 13px;
+  padding: 10px 12px;
+  gap: 15px;
+  font-size: 17px;
+  color: #f4faff;
+}
+.leaderboard-item.me {
+  border: 2px solid #FFD600;
+}
+.leaderboard-item img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2.5px solid #7C3AED;
+}
+.leader-youlbl {
+  background: #FFD600;
+  color: #22264A;
+  font-weight: 700;
+  font-size: 14px;
+  border-radius: 12px;
+  margin-left: 14px;
+  padding: 1.5px 10px;
+}
+.profile-logout-btn {
+  background: #FFD600;
+  color: #22264A;
+  font-weight: 700;
+  font-size: 18px;
+  padding: 12px 0;
+  width: 100%;
+  border: none;
+  border-radius: 9px;
+  margin: 32px 0 0 0;
+  box-shadow: 0 2px 8px #FFD60048;
+  cursor: pointer;
+}
+
+/* Footer */
+.profile-footer {
+  background: #16192A;
+  color: #9CA3AF;
+  padding: 12px 0 11px 0;
+  margin-top: 36px;
+  font-size: 15px;
+  text-align: center;
+  border-radius: 16px;
+  box-shadow: 0 -2px 10px #0a0c120a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.profile-footer-logo {
+  width: 26px;
+  height: 26px;
+}
+.profile-footer-appname {
+  font-weight: 700;
+  font-size: 17px;
+  color: #FFD600;
+}
+
+/* --- Mobile Below --- */
+@media (max-width: 600px) {
+  .profile-header {
+    flex-direction: column;
+    align-items: center;
+    gap: 13px;
+    padding: 14px 6vw;
+  }
+  .profile-name {
+    font-size: 6vw;
+    margin-bottom: 1vw;
+  }
+  .profile-username,
+  .profile-points {
+    font-size: 4vw;
+  }
+  .profile-section-title {
+    font-size: 5vw;
+  }
+  .leaderboard-item {
+    font-size: 4vw;
+    padding: 8px 2vw;
+  }
+  .profile-logout-btn {
+    font-size: 4.5vw;
+    padding: 11px 0;
+  }
+}

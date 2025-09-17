@@ -1,0 +1,6 @@
+git add .
+git commit -m "Your meaningful message"
+git push -u origin <branch>
+git checkout  manya
+
+

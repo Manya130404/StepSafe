@@ -7,6 +7,9 @@ import HomeScreen from './screens/HomeScreen';
 import ProfileDashboard from './screens/ProfileDashboard';
 import SosScreen from './screens/SosScreen';
 import EditProfile from "./screens/EditProfile";
+import LearnScreen from './screens/LearnScreen';
+import QuestsScreen from './screens/QuestsScreen';
+import GamesScreen from './screens/GamesScreen';
 
 // Example: Passing navigation through props
 function LoginWrapper() {
@@ -69,7 +72,10 @@ export default function App() {
         <Route path="/profile" element={<ProfileDashboardWrapper />} />
         <Route path="/sos" element={<SosWrapper />} />
         <Route path="/edit-profile" element={<EditProfile />} />
-        
+        <Route path="/learn" element={<LearnScreen />} />
+<Route path="/quests" element={<QuestsScreen />} />
+<Route path="/games" element={<GamesScreen />} />
+
       </Routes>
     </BrowserRouter>
   );

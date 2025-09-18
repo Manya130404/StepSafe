@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
@@ -13,6 +14,7 @@ const trainingGames = [
   {
     id: 1,
     title: "Situational Awareness",
+    path: "/situational-awareness", // <-- Navigation target
     description: "Test your ability to spot potential threats and unsafe situations in various environments.",
     icon: "👁️",
     difficulty: "Beginner",
@@ -23,6 +25,7 @@ const trainingGames = [
   {
     id: 2,
     title: "De-escalation Drills",
+    path: "/deescalation",
     description: "Practice verbal techniques to defuse tense situations and avoid confrontation.",
     icon: "🗣️",
     difficulty: "Intermediate",
@@ -33,6 +36,7 @@ const trainingGames = [
   {
     id: 3,
     title: "Escape Route Recon",
+    path: "/escape-route",
     description: "Learn to quickly identify and plan escape routes in different locations and scenarios.",
     icon: "🚪",
     difficulty: "Advanced",
@@ -42,10 +46,15 @@ const trainingGames = [
   },
 ];
 
-// Accept onSOS as a prop!
 export default function GamesPage({ onSOS }) {
+  const navigate = useNavigate();
+
   const handleStartTraining = (game) => {
-    alert(`Starting ${game.title} training...`);
+    if (game.path) {
+      navigate(game.path);
+    } else {
+      alert(`Starting ${game.title} training...`);
+    }
   };
 
   return (

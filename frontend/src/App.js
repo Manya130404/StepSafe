@@ -11,15 +11,21 @@ import LearnScreen from './screens/LearnScreen';
 import QuestsScreen from './screens/QuestsScreen';
 import GamesScreen from './screens/GamesScreen';
 import PersonalSafetyPage from './screens/LearnPages/PersonalSafetyPage';
-
+import Deescalation from "./screens/Deescalation";
 import Assistant from "./screens/Assistant";
-
+import SituationalAwarenessGame from './screens/SituationalAwareness';
+import SituationalAwarenessBeginner from './screens/SituationalAwarenessBeginner';
 
 
 // Example: Passing navigation through props
 function LoginWrapper() {
   const navigate = useNavigate();
   return <LoginScreen onLogin={() => navigate('/splash')} />;
+}
+
+function DeescalationWrapper() {
+  const navigate = useNavigate();
+  return <Deescalation onDeescalation={() => navigate('/deescalation')} />;
 }
 
 function SplashWrapper() {
@@ -41,7 +47,6 @@ function HomeWrapper() {
   );
 }
 
-
 function ProfileDashboardWrapper() {
   const navigate = useNavigate();
   return (
@@ -62,21 +67,15 @@ function SosWrapper() {
       onQuests={() => navigate('/quests')}
       onGames={() => navigate('/games')}
       onLearn={() => navigate('/learn')}
-    
-     
       onProfile={() => navigate('/profile')}
     />
   );
 }
-// eslint-disable-next-line no-unused-vars
-
 
 function GamesWrapper() {
   const navigate = useNavigate();
-  
-  return <GamesScreen  onSOS={() => navigate('/sos')} />;
+  return <GamesScreen onSOS={() => navigate('/sos')} onDeescalation={() => navigate('/deescalation')} />;
 }
-
 
 export default function App() {
   return (
@@ -89,10 +88,13 @@ export default function App() {
         <Route path="/sos" element={<SosWrapper />} />
         <Route path="/edit-profile" element={<EditProfile />} />
         <Route path="/learn" element={<LearnScreen />} />
-<Route path="/quests" element={<QuestsScreen />} />
-<Route path="/games" element={<GamesWrapper />} />
+        <Route path="/quests" element={<QuestsScreen />} />
+        <Route path="/games" element={<GamesWrapper />} />
         <Route path="/learn/personal-safety" element={<PersonalSafetyPage />} />
-<Route path="/assistant" element={<Assistant />} />
+        <Route path="/assistant" element={<Assistant />} />
+        <Route path="/deescalation" element={<DeescalationWrapper />} /> 
+        <Route path="/situational-awareness" element={<SituationalAwarenessGame />} />{/* <--- FIX HERE */}
+        <Route path="/situational-awareness-beginner" element={<SituationalAwarenessBeginner />} />
 
       </Routes>
     </BrowserRouter>

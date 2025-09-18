@@ -1,14 +1,13 @@
-"use client"
-import Navbar from "../components/Navbar"
-import Footer from "../components/Footer"
-
+import React from 'react';
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const user = {
   name: "Priya Mehra",
   points: 1230,
   level: 7,
   avatar: "/generated-image (1).png",
-}
+};
 
 const trainingGames = [
   {
@@ -41,17 +40,13 @@ const trainingGames = [
     color: "#23dda3",
     estimatedTime: "20-25 min",
   },
-]
+];
 
-export default function GamesPage() {
-  // ✅ fixed function (no TypeScript)
+// Accept onSOS as a prop!
+export default function GamesPage({ onSOS }) {
   const handleStartTraining = (game) => {
-    alert(`Starting ${game.title} training...`)
-  }
-
-  const handleSOS = () => {
-    alert("SOS activated!")
-  }
+    alert(`Starting ${game.title} training...`);
+  };
 
   return (
     <>
@@ -68,7 +63,6 @@ export default function GamesPage() {
                 level up your guardian abilities.
               </p>
             </div>
-
             {/* User Stats */}
             <div style={styles.userStats}>
               <div style={styles.statItem}>
@@ -83,14 +77,12 @@ export default function GamesPage() {
               </div>
             </div>
           </div>
-
           {/* Training Games Grid */}
           <div style={styles.gamesSection}>
             <h2 style={styles.sectionTitle}>
               <span style={{ fontSize: 24, marginRight: 10 }}>🛡️</span>
               Available Training Games
             </h2>
-
             <div style={styles.gamesGrid}>
               {trainingGames.map((game) => (
                 <div key={game.id} style={{ ...styles.gameCard, borderColor: game.color }} className="game-card">
@@ -100,10 +92,8 @@ export default function GamesPage() {
                       <span style={{ ...styles.difficultyBadge, background: game.color }}>{game.difficulty}</span>
                     </div>
                   </div>
-
                   <h3 style={styles.gameTitle}>{game.title}</h3>
                   <p style={styles.gameDescription}>{game.description}</p>
-
                   <div style={styles.gameStats}>
                     <div style={styles.gameStatItem}>
                       <span style={styles.gameStatIcon}>⏱️</span>
@@ -114,7 +104,6 @@ export default function GamesPage() {
                       <span style={styles.gameStatText}>+{game.points} AP</span>
                     </div>
                   </div>
-
                   <button
                     style={{ ...styles.startButton, background: game.color }}
                     onClick={() => handleStartTraining(game)}
@@ -126,14 +115,12 @@ export default function GamesPage() {
               ))}
             </div>
           </div>
-
           {/* Daily Challenge Section */}
           <div style={styles.challengeSection}>
             <h2 style={styles.sectionTitle}>
               <span style={{ fontSize: 24, marginRight: 10 }}>🗓️</span>
               Today's Challenge
             </h2>
-
             <div style={styles.challengeCard}>
               <div style={styles.challengeIcon}>🎯</div>
               <div style={styles.challengeContent}>
@@ -149,9 +136,8 @@ export default function GamesPage() {
             </div>
           </div>
         </div>
-
         {/* Floating SOS Button */}
-        <button className="sos-fab" onClick={handleSOS} aria-label="SOS">
+        <button className="sos-fab" onClick={onSOS} aria-label="SOS">
           SOS
         </button>
       </div>
@@ -164,12 +150,10 @@ export default function GamesPage() {
           box-shadow: 0 12px 40px rgba(124, 58, 237, 0.25);
           border-color: #FFD600 !important;
         }
-        
         .start-button:hover, .start-button:focus {
           transform: scale(1.05);
           box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
         }
-        
         .sos-fab {
           position: fixed;
           right: 32px;
@@ -190,27 +174,25 @@ export default function GamesPage() {
           z-index: 3333;
           transition: transform .16s cubic-bezier(.36,1.78,.63,1.01), box-shadow .16s;
         }
-        
         .sos-fab:hover, .sos-fab:focus {
           transform: scale(1.14) rotate(-7deg);
           box-shadow: 0 6px 30px #F8274D88;
           background: linear-gradient(131deg,#FA476A 75%,#FFAA47 100%);
           outline: none;
         }
-        
         @media (max-width: 768px) {
           .sos-fab {
             right: 16px !important;
             bottom: 16px !important;
-            width: 48px; 
-            height: 48px; 
+            width: 48px;
+            height: 48px;
             font-size: 1em;
           }
         }
         `}
       </style>
     </>
-  )
+  );
 }
 
 const styles = {
@@ -448,4 +430,4 @@ const styles = {
     fontWeight: 700,
     color: "#FFD600",
   },
-}
+};

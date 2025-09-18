@@ -4,7 +4,7 @@ import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 
 const ALL_SCENARIOS = [
-// --- The 10 emergency scenarios first (with muted theme colors) ---
+  
   {
     title: "Medical Emergency in Public",
     color: "#22294E",
@@ -115,7 +115,7 @@ const ALL_SCENARIOS = [
       "Reach out to relevant organizations for support."
     ]
   },
-// --- The original 8 physical/mental scenarios (match main palette) ---
+  // --- The original 8 physical/mental scenarios ---
   {
     title: "Walking Alone at Night",
     color: "#232946",
@@ -213,50 +213,52 @@ function DropdownCard({ title, color, points }) {
     <div
       className={`dropdown-scenario-card${open ? " open" : ""}`}
       style={{
-        background: "#191d2e",
-        border: `2px solid ${color}`,
-        minWidth: 260,
-        maxWidth: 332,
-        flex: "1 1 260px",
-        borderRadius: 19,
-        marginBottom: 10,
-        color: "#ffeeb2",
-        boxShadow: `0 2px 6px #20223518`,
-        fontSize: "15px",
-        transition: "box-shadow 0.19s, transform 0.14s, border-color 0.13s, background 0.13s"
+        background: `linear-gradient(120deg, #212A42bb 70%, ${color} 100%)`,
+        border: `2.8px solid #2e4ba7`,
+        minWidth: 300,
+        maxWidth: 420,
+        flex: "1 1 370px",
+        borderRadius: 32,
+        marginBottom: 22,
+        color: "#e2eaff",
+        boxShadow: `0 6px 22px #21338827`,
+        fontSize: "12px",
+        padding: "24px 26px 17px 26px",
+        transition: "box-shadow .23s, transform .14s, border-color .15s, background .13s"
       }}
       tabIndex={0}
-      onClick={() => setOpen(o => !o)}
+      onClick={() => setOpen((o) => !o)}
       onKeyDown={e => { if (e.key === "Enter" || e.key === " ") setOpen(o => !o); }}
     >
       <div style={{
-        display: "flex", alignItems: "center", cursor: "pointer", userSelect: "none", minHeight: 40
+        display: "flex", alignItems: "center", cursor: "pointer", userSelect: "none", minHeight: 52
       }}>
         <h3 style={{
-          color: "#FFD600",
-          fontSize: 16.3,
-          fontWeight: 700,
+          color: "#7BB3FF",
+          fontSize: 20,
+          fontWeight: 800,
+          letterSpacing: "0.7px",
           margin: "0 0 0 0",
           flex: 1,
           textAlign: "left"
         }}>{title}</h3>
         <span style={{
-          fontSize: 22, fontWeight: 600, marginLeft: 10,
-          color: open ? "#FFD600" : "#a3a3ce", transition: ".12s"
+          fontSize: 26, fontWeight: 600, marginLeft: 13,
+          color: open ? "#FFD600" : "#85B6FF", transition: ".15s"
         }}>
           {open ? "▲" : "▼"}
         </span>
       </div>
       {open &&
         <ul style={{
-          paddingLeft: 18,
+          paddingLeft: 22,
           marginBottom: 0,
-          marginTop: 7,
-          fontSize: 14.3,
-          lineHeight: 1.63,
-          color: "#fff8d9"
+          marginTop: 11,
+          fontSize: 15,
+          lineHeight: 1.64,
+          color: "#fff9ec"
         }}>
-          {points.map((tip, i) => <li key={i}>{tip}</li>)}
+          {points.map((tip, i) => <li key={i} style={{marginBottom: 4}}>{tip}</li>)}
         </ul>
       }
     </div>
@@ -269,39 +271,60 @@ export default function PersonalSafetyPage() {
   return (
     <div style={{
       minHeight: "100vh",
-      background: "linear-gradient(135deg,#181C24 60%,#232946 100%)"
+      background: "linear-gradient(135deg, #1B2336 55%, #364265 100%)"
     }}>
       <Navbar />
       <main style={{
-        maxWidth: 980,
+        maxWidth: 1240,
         margin: "48px auto 0 auto",
-        padding: "32px 10px",
-        borderRadius: 22,
-        background: "linear-gradient(90deg,#23253C 88%, #181C24 100%)",
-        boxShadow: "0 7px 28px rgba(110,120,224,0.10)",
-        color: "#FFD600"
+        padding: "38px 22px 56px 22px",
+        borderRadius: 36,
+        background: "linear-gradient(108deg, #22305A 66%, #172340 100%)",
+        boxShadow: "0 7px 46px rgba(44,70,176,0.065)",
+        color: "#DEE8FF"
       }}>
+        <button
+          onClick={() => navigate("/learn")}
+          style={{
+            display: "block",
+            margin: "0 auto 34px auto",
+            background: "#27468E",
+            color: "#e6eFFF",
+            fontWeight: 600,
+            border: "none",
+            borderRadius: 21,
+            boxShadow: "0 2px 12px #23294617",
+            padding: "13px 38px",
+            fontSize: 17.3,
+            opacity: 0.97,
+            cursor: "pointer",
+            zIndex: 1,
+            letterSpacing: "0.03em"
+          }}
+        >← Back to Learn</button>
         <h1 style={{
-          color: "#FFD600",
-          fontSize: "clamp(21px,5vw,36px)",
+          color: "#7BB3FF",
+          fontSize: "clamp(27px,6vw,46px)",
           fontWeight: 900,
-          letterSpacing: "1.5px",
+          letterSpacing: "1.7px",
           textAlign: "center",
-          marginBottom: 14
+          marginBottom: 18,
+          textShadow: "0 2px 16px #0c163133"
         }}>Personal Safety Scenarios & Tips</h1>
         <div style={{
-          color: "#B8AFFF",
-          fontSize: 15.6,
+          color: "#B8D2FF",
+          fontSize: 18,
           textAlign: "center",
           fontWeight: 600,
-          marginBottom: 24
+          marginBottom: 34,
+          lineHeight: 1.44
         }}>
           Practical scenarios and tips for your daily peace of mind and quick reference.
         </div>
         <section>
           <div style={{
             display: "flex", flexWrap: "wrap",
-            gap: 13, justifyContent: "center"
+            gap: "32px 34px", justifyContent: "center"
           }}>
             {ALL_SCENARIOS.map((sc, idx) =>
               <DropdownCard key={sc.title + "-" + idx} {...sc} />
@@ -309,52 +332,37 @@ export default function PersonalSafetyPage() {
           </div>
         </section>
       </main>
-      <button
-        onClick={() => navigate("/learn")}
-        style={{
-          position: "fixed",
-          left: 19,
-          top: 72,
-          background: "#FFD600",
-          color: "#23253C",
-          fontWeight: 700,
-          border: "none",
-          borderRadius: 99,
-          boxShadow: "0 2px 12px #FFD60022",
-          padding: "7px 19px",
-          fontSize: 15.1,
-          cursor: "pointer",
-          zIndex: 2228
-        }}
-      >← Back to Learn</button>
       <Footer />
       <style>{`
         @media (max-width: 780px) {
-          main { 
-            padding: 2vw 1.5vw !important;
+          main {
+            padding: 9vw 5vw 16vw 5vw !important;
             max-width: 100vw !important;
           }
-          button[style] {
-            left: 4px !important; top: 46px !important; padding: 6px 11px !important; font-size: 13px !important; 
+          .dropdown-scenario-card {
+            min-width: 93vw !important;
+            max-width: 99vw !important;
+            border-radius: 7vw !important;
+            padding: 18px 4vw 16px 4vw !important;
           }
         }
-        .dropdown-scenario-card { 
-          transition: box-shadow 0.18s, transform 0.12s, border-color 0.13s, background 0.14s;
+        .dropdown-scenario-card {
+          transition: box-shadow 0.2s, transform 0.15s, border-color 0.13s, background 0.13s;
         }
         .dropdown-scenario-card:hover, .dropdown-scenario-card:focus-within {
-          box-shadow: 0 7px 28px #FFD60045, 0 2px 16px #22294620;
-          transform: translateY(-4px) scale(1.025);
-          border-color: #FFD600 !important;
+          box-shadow: 0 11px 38px #55A8F966, 0 2.5px 18px #1B233630;
+          transform: translateY(-7px) scale(1.035);
+          border-color: #3A85FF !important;
           cursor: pointer;
-          background: #232946e8;
-          filter: brightness(1.035);
+          background: linear-gradient(110deg, #293a66 60%, #3a85ff45 100%) !important;
+          filter: brightness(1.07);
         }
         .dropdown-scenario-card ul {
-          margin-top: 8px;
-          animation: fadeInAccordion .22s;
+          margin-top: 10px;
+          animation: fadeInAccordion .18s;
         }
         @keyframes fadeInAccordion {
-          from { opacity: 0; transform: translateY(-4px);}
+          from { opacity: 0; transform: translateY(-8px);}
           to { opacity: 1; transform: none; }
         }
       `}</style>

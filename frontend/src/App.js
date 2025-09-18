@@ -68,6 +68,15 @@ function SosWrapper() {
     />
   );
 }
+// eslint-disable-next-line no-unused-vars
+
+
+function GamesWrapper() {
+  const navigate = useNavigate();
+  
+  return <GamesScreen  onSOS={() => navigate('/sos')} />;
+}
+
 
 export default function App() {
   return (
@@ -81,9 +90,10 @@ export default function App() {
         <Route path="/edit-profile" element={<EditProfile />} />
         <Route path="/learn" element={<LearnScreen />} />
 <Route path="/quests" element={<QuestsScreen />} />
-<Route path="/games" element={<GamesScreen />} />
+<Route path="/games" element={<GamesWrapper />} />
         <Route path="/learn/personal-safety" element={<PersonalSafetyPage />} />
 <Route path="/assistant" element={<Assistant />} />
+
       </Routes>
     </BrowserRouter>
   );

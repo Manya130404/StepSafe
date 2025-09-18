@@ -41,3 +41,11 @@ body {
   font-weight: 500;
   cursor: pointer;
 }
+
+html, body, #root {
+  width: 100vw;
+  min-height: 100vh;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  background: linear-gradient(135deg,#181C24 60%,#232946 100%);
+}

@@ -1,50 +1,76 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+
 import LoginScreen from './screens/LoginScreen';
 import SplashScreen from './screens/SplashScreen';
 import HomeScreen from './screens/HomeScreen';
 import ProfileDashboard from './screens/ProfileDashboard';
 import SosScreen from './screens/SosScreen';
+import EditProfile from "./screens/EditProfile";
+
+// Example: Passing navigation through props
+function LoginWrapper() {
+  const navigate = useNavigate();
+  return <LoginScreen onLogin={() => navigate('/splash')} />;
+}
+
+function SplashWrapper() {
+  const navigate = useNavigate();
+  return <SplashScreen onProceed={() => navigate('/home')} />;
+}
+
+function HomeWrapper() {
+  const navigate = useNavigate();
+  return (
+    <HomeScreen
+      onHome={() => navigate('/home')}
+      onStartQuest={() => alert("Start Quest!")}
+      onPlayGames={() => alert("Play Games!")}
+      onLearnGrow={() => alert("Learn Hub!")}
+      onProfile={() => navigate('/profile')}
+      
+      onSOS={() => navigate('/sos')}
+    />
+  );
+}
+
+function ProfileDashboardWrapper() {
+  const navigate = useNavigate();
+  return (
+    <ProfileDashboard
+      onHome={() => navigate('/home')}
+      onLogout={() => navigate('/')}
+      onSOS={() => navigate('/sos')}
+      onEditProfile={() => navigate('/edit-profile')}
+    />
+  );
+}
+
+function SosWrapper() {
+  const navigate = useNavigate();
+  return (
+    <SosScreen
+      onHome={() => navigate('/home')}
+      onQuests={() => alert("Quests!")}
+      onGames={() => alert("Games!")}
+      onLearn={() => alert("Learn!")}
+      onProfile={() => navigate('/profile')}
+    />
+  );
+}
 
 export default function App() {
-  const [currentScreen, setCurrentScreen] = useState('login');
-
   return (
-    <>
-      {currentScreen === 'login' && (
-        <LoginScreen
-          onLogin={() => setCurrentScreen('splash')}
-        />
-      )}
-      {currentScreen === 'splash' && (
-        <SplashScreen
-          onProceed={() => setCurrentScreen('home')}
-        />
-      )}
-      {currentScreen === 'home' && (
-        <HomeScreen
-          onStartQuest={() => alert("Start Quest!")}
-          onPlayGames={() => alert("Play Games!")}
-          onLearnGrow={() => alert("Learn Hub!")}
-          onProfile={() => setCurrentScreen('profile')}
-          onSOS={() => setCurrentScreen('sos')}
-        />
-      )}
-      {currentScreen === 'profile' && (
-        <ProfileDashboard
-          onHome={() => setCurrentScreen('home')}
-          onLogout={() => setCurrentScreen('login')}
-          onSOS={() => setCurrentScreen('sos')}
-        />
-      )}
-      {currentScreen === 'sos' && (
-        <SosScreen
-          onHome={() => setCurrentScreen('home')}
-          onQuests={() => alert("Quests!")}
-          onGames={() => alert("Games!")}
-          onLearn={() => alert("Learn!")}
-          onProfile={() => setCurrentScreen('profile')}
-        />
-      )}
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LoginWrapper />} />
+        <Route path="/splash" element={<SplashWrapper />} />
+        <Route path="/home" element={<HomeWrapper />} />
+        <Route path="/profile" element={<ProfileDashboardWrapper />} />
+        <Route path="/sos" element={<SosWrapper />} />
+        <Route path="/edit-profile" element={<EditProfile />} />
+        
+      </Routes>
+    </BrowserRouter>
   );
 }

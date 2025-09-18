@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer"; // Make sure the path is correct
+import Footer from "../components/Footer";
 
 const profile = {
   username: "guardian01",
@@ -16,8 +16,7 @@ const leaderboard = [
   { name: "Sameer R.", points: 900, avatar: "/generated-image (4).png" }
 ];
 
-export default function ProfileDashboard({ onHome, onLogout, onSOS }) {
-  const [hoveredSection, setHoveredSection] = useState('');
+export default function ProfileDashboard({ onHome, onLogout, onSOS, onEditProfile }) {
   const [hoveredLeader, setHoveredLeader] = useState(null);
   const [showLogoutPrompt, setShowLogoutPrompt] = useState(false);
 
@@ -33,50 +32,31 @@ export default function ProfileDashboard({ onHome, onLogout, onSOS }) {
           onSOS={onSOS}
           onProfile={() => {}}
         />
-        <div style={styles.page}>
-          {/* Header */}
-          <div
-            style={{
-              ...styles.header,
-              ...(hoveredSection === 'header' ? styles.hoverCard : {})
-            }}
-            onMouseEnter={() => setHoveredSection('header')}
-            onMouseLeave={() => setHoveredSection('')}
-          >
+        <div className="profileFullWidth" style={styles.page}>
+          {/* Summary */}
+          <div style={styles.card}>
             <img src={profile.avatar} alt="avatar" style={styles.avatar} />
-            <div>
-              <div style={styles.username}>@{profile.username}</div>
-              <div style={styles.name}>{profile.name}</div>
-              <div style={styles.ptsRow}>
-                <span style={styles.pointsIcon}>⚡</span>
-                <span style={styles.pointsNum}>{profile.points}</span>
-                <span style={styles.pointsLbl}>Aura Points</span>
-              </div>
+            <div style={styles.username}>@{profile.username}</div>
+            <div style={styles.name}>{profile.name}</div>
+            <div style={styles.ptsRow}>
+              <span style={styles.pointsIcon}>⚡</span>
+              <span style={styles.pointsNum}>{profile.points}</span>
+              <span style={styles.pointsLbl}>Aura Points</span>
             </div>
+            <button
+              style={styles.editBtn}
+              onClick={onEditProfile}
+            >
+              ✏️ Edit Profile
+            </button>
           </div>
-
           {/* Growth Chart */}
-          <div
-            style={{
-              ...styles.section,
-              ...(hoveredSection === 'growth' ? styles.hoverCard : {})
-            }}
-            onMouseEnter={() => setHoveredSection('growth')}
-            onMouseLeave={() => setHoveredSection('')}
-          >
+          <div style={styles.card}>
             <div style={styles.sectionTitle}>Monthly Aura Points Growth</div>
             <MonthlyGrowthGraph values={monthlyPoints} />
           </div>
-
           {/* Leaderboard */}
-          <div
-            style={{
-              ...styles.section,
-              ...(hoveredSection === 'leaderboard' ? styles.hoverCard : {})
-            }}
-            onMouseEnter={() => setHoveredSection('leaderboard')}
-            onMouseLeave={() => setHoveredSection('')}
-          >
+          <div style={styles.card}>
             <div style={styles.sectionTitle}>Leaderboard</div>
             <div style={styles.leaderboardList}>
               {leaderboard.map((u, i) => (
@@ -98,38 +78,81 @@ export default function ProfileDashboard({ onHome, onLogout, onSOS }) {
               ))}
             </div>
           </div>
-
-          {/* Log out button */}
-          <button
-            style={styles.logout}
-            onClick={() => setShowLogoutPrompt(true)}
-          >
-            Log out
-          </button>
-
-          {/* Logout Modal */}
-          {showLogoutPrompt && (
-            <div style={styles.modalOverlay}>
-              <div style={styles.modal}>
-                <div style={{ color: "#FFD600", fontWeight: 600, fontSize: 19, marginBottom: 16 }}>
-                  Do you want to log out?
-                </div>
-                <div style={{ display: "flex", gap: 18 }}>
-                  <button
-                    style={styles.modalYes}
-                    onClick={() => { setShowLogoutPrompt(false); onLogout(); }}
-                  >Yes</button>
-                  <button
-                    style={styles.modalNo}
-                    onClick={() => setShowLogoutPrompt(false)}
-                  >No</button>
-                </div>
+        </div>
+        <button className="sos-fab" onClick={onSOS} aria-label="SOS">SOS</button>
+        {showLogoutPrompt && (
+          <div style={styles.modalOverlay}>
+            <div style={styles.modal}>
+              <div style={{ color: "#FFD600", fontWeight: 600, fontSize: 19, marginBottom: 16 }}>
+                Do you want to log out?
+              </div>
+              <div style={{ display: "flex", gap: 18 }}>
+                <button
+                  style={styles.modalYes}
+                  onClick={() => { setShowLogoutPrompt(false); onLogout(); }}
+                >Yes</button>
+                <button
+                  style={styles.modalNo}
+                  onClick={() => setShowLogoutPrompt(false)}
+                >No</button>
               </div>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
       <Footer />
+      <style>{`
+        .profileFullWidth {
+          display: flex;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 38px;
+          margin-top: 48px;
+          margin-bottom: 64px;
+          width: 100vw;
+          max-width: 100vw;
+          padding-left: 0;
+          padding-right: 0;
+        }
+        .sos-fab {
+          position: fixed;
+          right: 32px;
+          bottom: 36px;
+          background: linear-gradient(135deg,#F8274C 70%,#F77A27 100%);
+          color: #fff;
+          border-radius: 50%;
+          width: 60px;
+          height: 60px;
+          border: none;
+          font-size: 1.12em;
+          font-weight: bold;
+          box-shadow: 0 4px 18px #F8274D55;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 3333;
+          transition: transform .16s cubic-bezier(.36,1.78,.63,1.01), box-shadow .16s;
+        }
+        .sos-fab:hover, .sos-fab:focus {
+          transform: scale(1.14) rotate(-7deg);
+          box-shadow: 0 6px 30px #F8274D88;
+          background: linear-gradient(131deg,#FA476A 75%,#FFAA47 100%);
+          outline: none;
+        }
+        @media (max-width:750px) {
+          .profileFullWidth {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+            gap: 23px;
+          }
+          .sos-fab {
+            right: 14px !important;
+            bottom: 14px !important;
+            width: 48px; height: 48px; font-size: 1em;
+          }
+        }
+      `}</style>
     </>
   );
 }
@@ -137,20 +160,20 @@ export default function ProfileDashboard({ onHome, onLogout, onSOS }) {
 function MonthlyGrowthGraph({ values }) {
   const maxY = Math.max(...values) + 40;
   return (
-    <svg width="100%" height="110" style={{ background: "none", margin: "14px 0", maxWidth: "100vw" }} viewBox="0 0 350 110" preserveAspectRatio="none">
+    <svg width="100%" height="110" style={{ background: "none", margin: "22px 0", maxWidth: 990 }} viewBox="0 0 800 110" preserveAspectRatio="none">
       <polyline
-        fill="rgba(92,65,238,0.12)"
+        fill="rgba(92,65,238,0.13)"
         stroke="none"
-        points={values.map((v, i) => `${15 + i * 27},${105 - (v / maxY) * 88}`).join(" ") + ` 330,110 15,110`}
+        points={values.map((v, i) => `${30 + i * 67},${105 - (v / maxY) * 88}`).join(" ") + ` 760,110 30,110`}
       />
       <polyline
         fill="none"
         stroke="#7C3AED"
         strokeWidth="4"
-        points={values.map((v, i) => `${15 + i * 27},${105 - (v / maxY) * 88}`).join(" ")}
+        points={values.map((v, i) => `${30 + i * 67},${105 - (v / maxY) * 88}`).join(" ")}
       />
       {values.map((v, i) =>
-        <circle key={i} cx={15 + i * 27} cy={105 - (v / maxY) * 88} r={4} fill="#D8B4FE" />
+        <circle key={i} cx={30 + i * 67} cy={105 - (v / maxY) * 88} r={7} fill="#D8B4FE" />
       )}
     </svg>
   );
@@ -160,114 +183,109 @@ const styles = {
   bg: {
     minHeight: "100vh",
     background: "linear-gradient(135deg,#181C24 60%,#232946 100%)",
-    width: "100%"
+    width: "100vw",
+    boxSizing: "border-box"
   },
   page: {
     fontFamily: 'Poppins, Segoe UI, sans-serif',
     color: "#F5F6FF",
-    width: "100%",
-    maxWidth: 500,
-    padding: "6vw 2vw 10vw 2vw",
-    margin: "0 auto",
+    width: "100vw",
+    maxWidth: "100vw",
+    padding: "clamp(26px,6vw,44px) 0 60px 0",
+    margin: 0,
     boxSizing: "border-box"
   },
-  header: {
+  card: {
+    background: "linear-gradient(90deg,#22264A 70%, #23253C 100%)",
+    borderRadius: 27,
+    boxShadow: "0 7px 28px rgba(110,120,224,0.15)",
+    padding: "clamp(43px,6vw,68px) clamp(29px,5vw,74px)",
+    margin: "0 auto",
+    width: "80vw",
+    maxWidth: "1380px",
     display: "flex",
-    alignItems: "center",
-    gap: "4vw",
-    margin: "6vw 0 4vw 0",
-    padding: "5vw 4vw",
-    background: "linear-gradient(90deg,#22264A 70%, #252856 100%)",
-    borderRadius: 28,
-    boxShadow: "0 3px 25px rgba(30,26,58,.12)",
-    flexWrap: "wrap"
-  },
-  hoverCard: {
-    boxShadow: "0 6px 26px rgba(110,120,224,0.17), 0 2px 8px #7C3AED43",
-    transform: "scale(1.013)"
+    flexDirection: "column",
+    alignItems: "center"
   },
   avatar: {
-    width: "18vw", maxWidth: 70, minWidth: 48, height: "18vw", maxHeight: 70, minHeight: 48,
-    borderRadius: "50%", background: "#232946", border: "3.5px solid #7C3AED"
+    width: "clamp(90px,15vw,164px)",
+    height: "clamp(90px,15vw,164px)",
+    borderRadius: "50%",
+    background: "#232946",
+    border: "7px solid #7C3AED",
+    marginBottom: 20,
+    marginTop: 12
   },
   username: {
-    fontSize: "4vw", minFontSize: 14, fontWeight: 700, color: "#B8AFFF", marginBottom: 2
+    fontSize: "clamp(22px,3vw,32px)", fontWeight: 500, color: "#B8AFFF"
   },
   name: {
-    fontSize: "6vw", minFontSize: 18, fontWeight: 600, color: "#FFD600", letterSpacing: 1, marginBottom: 8
+    fontSize: "clamp(26px,4vw,45px)", fontWeight: 700, color: "#FFD600", marginBottom: 18
+  },
+  editBtn: {
+    background: "#FFD600",
+    color: "#23264A",
+    border: "none",
+    borderRadius: "13px",
+    fontWeight: 700,
+    fontSize: "clamp(19px,2vw,31px)",
+    padding: "13px 35px",
+    marginTop: 35,
+    cursor: "pointer",
+    marginBottom: 2,
+    letterSpacing: ".03em"
   },
   ptsRow: {
-    display: "flex", alignItems: "center", gap: 10
+    display: "flex", alignItems: "center", gap: 17, marginBottom: 3, marginTop: 10
   },
   pointsIcon: {
-    fontSize: "5vw", color: "#FFD600", marginRight: 3
+    fontSize: "clamp(19px,2.5vw,27px)", color: "#FFD600"
   },
   pointsNum: {
-    fontSize: "5vw", fontWeight: 700, color: "#FFD600"
+    fontSize: "clamp(18px,3vw,33px)", fontWeight: 800, color: "#FFD600"
   },
   pointsLbl: {
-    fontSize: "3.5vw", color: "#d6e2fb", marginLeft: 7
-  },
-  section: {
-    margin: "5vw 0 0 0",
-    background: "#23253C",
-    borderRadius: 18,
-    boxShadow: "0 2px 18px rgba(110,120,224,0.08)",
-    padding: "5vw 4vw 3vw 4vw",
-    transition: "box-shadow 0.18s, transform 0.18s"
+    fontSize: "clamp(15px,2.2vw,19px)", color: "#d6e2fb", marginLeft: 7
   },
   sectionTitle: {
-    fontSize: "5vw", minFontSize: 18, fontWeight: 600, color: "#B8AFFF", marginBottom: 11
+    fontSize: "clamp(19px,2.7vw,32px)", fontWeight: 700, color: "#B8AFFF", marginBottom: 17
   },
   leaderboardList: {
     display: "flex",
     flexDirection: "column",
-    gap: "3vw",
-    margin: "10px 0"
+    gap: "clamp(18px,2vw,35px)",
+    margin: "13px 0"
   },
   leaderItem: {
     display: "flex",
     alignItems: "center",
-    gap: "4vw",
+    gap: "clamp(15px,2.5vw,28px)",
     background: "#191D2E",
-    borderRadius: 13,
-    padding: "2.2vw 4vw",
-    fontSize: "4.2vw",
+    borderRadius: 16,
+    padding: "clamp(15px,2.6vw,35px) clamp(32px,2.5vw,50px)",
+    fontSize: "clamp(19px,2.9vw,30px)",
     color: "#F4FAFF",
-    fontWeight: 500,
-    boxShadow: "0 1px 10px rgba(60,70,120,.07)",
+    fontWeight: 600,
+    boxShadow: "0 2px 14px rgba(60,70,120,.13)",
     cursor: "pointer",
     transition: "box-shadow 0.18s, background 0.15s, border 0.14s, transform 0.17s"
   },
   leaderMe: {
-    border: "2px solid #FFD600"
+    border: "2.5px solid #FFD600"
   },
   leaderHover: {
     background: "#272a46",
-    boxShadow: "0 6px 24px #8648f033",
-    transform: "scale(1.017)",
-    border: "2px solid #7C3AED"
+    boxShadow: "0 8px 32px #8648f033",
+    transform: "scale(1.027)",
+    border: "2.5px solid #7C3AED"
   },
   leaderAvatar: {
-    width: "11vw", minWidth: 37, height: "11vw", minHeight: 37, borderRadius: "50%", border: "2px solid #7C3AED"
+    width: "clamp(56px,7vw,90px)", height: "clamp(56px,7vw,90px)", borderRadius: "50%", border: "3.5px solid #7C3AED"
   },
-  leaderName: {flex:1, color:"#FFD600", fontWeight:600, fontSize:"4vw"},
-  leaderScore: { fontWeight:700, color:"#A5B4FC" },
+  leaderName: { flex: 1, color: "#FFD600", fontWeight: 800 },
+  leaderScore: { fontWeight: 700, color: "#A5B4FC" },
   leaderYou: {
-    background:"#FFD600", color:"#22264A", fontWeight:600, fontSize:"3vw", padding:"2px 10px", borderRadius:"16px", marginLeft:11
-  },
-  logout: {
-    margin: "7vw 0 0 0",
-    background: "#FFD600",
-    color: "#23253C",
-    fontWeight: 700,
-    fontSize: "4vw",
-    padding: "10px 30px",
-    border: "none",
-    borderRadius: 10,
-    cursor: "pointer",
-    boxShadow: "0 2px 8px #FFD60038",
-    display: "block"
+    background: "#FFD600", color: "#22264A", fontWeight: 700, fontSize: "clamp(16px,2vw,22px)", padding: "7px 19px", borderRadius: "19px", marginLeft: 18
   },
   modalOverlay: {
     position: "fixed",
@@ -280,7 +298,7 @@ const styles = {
     background: "#23253C",
     borderRadius: 18,
     boxShadow: "0 8px 38px #0007",
-    padding: "9vw 10vw",
+    padding: "34px 36px",
     display: "flex",
     flexDirection: "column",
     alignItems: "center"
@@ -289,20 +307,20 @@ const styles = {
     background: "#FFD600",
     color: "#23264A",
     fontWeight: 700,
-    fontSize: "4vw",
+    fontSize: "21px",
     border: "none",
-    borderRadius: 8,
-    padding: "8px 22px",
+    borderRadius: 10,
+    padding: "11px 27px",
     cursor: "pointer"
   },
   modalNo: {
     background: "none",
     color: "#B8AFFF",
     border: "2px solid #B8AFFF",
-    borderRadius: 8,
+    borderRadius: 10,
     fontWeight: 700,
-    fontSize: "4vw",
-    padding: "8px 22px",
+    fontSize: "21px",
+    padding: "11px 27px",
     cursor: "pointer"
   }
 };

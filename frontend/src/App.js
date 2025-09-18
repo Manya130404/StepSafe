@@ -10,6 +10,11 @@ import EditProfile from "./screens/EditProfile";
 import LearnScreen from './screens/LearnScreen';
 import QuestsScreen from './screens/QuestsScreen';
 import GamesScreen from './screens/GamesScreen';
+import PersonalSafetyPage from './screens/LearnPages/PersonalSafetyPage';
+
+import Assistant from "./screens/Assistant";
+
+
 
 // Example: Passing navigation through props
 function LoginWrapper() {
@@ -27,15 +32,15 @@ function HomeWrapper() {
   return (
     <HomeScreen
       onHome={() => navigate('/home')}
-      onStartQuest={() => alert("Start Quest!")}
-      onPlayGames={() => alert("Play Games!")}
-      onLearnGrow={() => alert("Learn Hub!")}
+      onQuests={() => navigate('/quests')}
+      onGames={() => navigate('/games')}
+      onLearn={() => navigate('/learn')}
       onProfile={() => navigate('/profile')}
-      
       onSOS={() => navigate('/sos')}
     />
   );
 }
+
 
 function ProfileDashboardWrapper() {
   const navigate = useNavigate();
@@ -54,9 +59,11 @@ function SosWrapper() {
   return (
     <SosScreen
       onHome={() => navigate('/home')}
-      onQuests={() => alert("Quests!")}
-      onGames={() => alert("Games!")}
-      onLearn={() => alert("Learn!")}
+      onQuests={() => navigate('/quests')}
+      onGames={() => navigate('/games')}
+      onLearn={() => navigate('/learn')}
+    
+     
       onProfile={() => navigate('/profile')}
     />
   );
@@ -75,7 +82,8 @@ export default function App() {
         <Route path="/learn" element={<LearnScreen />} />
 <Route path="/quests" element={<QuestsScreen />} />
 <Route path="/games" element={<GamesScreen />} />
-
+        <Route path="/learn/personal-safety" element={<PersonalSafetyPage />} />
+<Route path="/assistant" element={<Assistant />} />
       </Routes>
     </BrowserRouter>
   );

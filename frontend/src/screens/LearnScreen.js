@@ -1,36 +1,40 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 export default function LearnScreen() {
-  // Example content for modules—customize as needed!
+  const navigate = useNavigate();
   const modules = [
     {
       title: "Personal Safety Basics",
       desc: "Quick tips and common-sense ways to stay safe day-to-day.",
       level: "Beginner",
+      route: "/learn/personal-safety"
     },
     {
       title: "Emergency Response Training",
       desc: "How to act quickly and calmly in dangerous situations.",
       level: "Intermediate",
+      route: "/learn/emergency-response"
     },
     {
       title: "Self-Defense Moves",
       desc: "Step-by-step video and techniques for all ages.",
       level: "All Levels",
+      route: "/learn/self-defense"
     },
     {
       title: "Online Safety & Scam Awareness",
       desc: "How to avoid digital risks, scams, and data leaks.",
       level: "Beginner",
+      route: "/learn/online-safety"
     },
   ];
 
   return (
     <div style={{ minHeight: "100vh", background: "linear-gradient(135deg,#181C24 60%,#232946 100%)" }}>
       <Navbar />
-
       <main className="learn-main" style={{
         maxWidth: 900,
         margin: "48px auto 0 auto",
@@ -55,7 +59,6 @@ export default function LearnScreen() {
           fontWeight: 600,
           marginBottom: 40,
         }}>Sharpen your skills and knowledge in staying safe—online, in public, and at home.</div>
-
         <section style={{
           display: "flex",
           flexWrap: "wrap",
@@ -63,20 +66,31 @@ export default function LearnScreen() {
           justifyContent: "center"
         }}>
           {modules.map((m, i) => (
-            <div key={m.title} style={{
-              flex: "1 1 320px",
-              maxWidth: 340,
-              background: "#191D2E",
-              border: "2.2px solid #7C3AED",
-              borderRadius: 18,
-              padding: "23px 21px 31px 21px",
-              color: "#FFD600",
-              textAlign: "left",
-              boxShadow: "0 2px 18px #8b5cf633",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start"
-            }}>
+            <div
+              key={m.title}
+              tabIndex={0}
+              role="button"
+              onClick={() => navigate(m.route)}
+              onKeyPress={e => { if (e.key === "Enter") navigate(m.route) }}
+              style={{
+                flex: "1 1 320px",
+                maxWidth: 340,
+                background: "#191D2E",
+                border: "2.2px solid #7C3AED",
+                borderRadius: 18,
+                padding: "23px 21px 31px 21px",
+                color: "#FFD600",
+                textAlign: "left",
+                boxShadow: "0 2px 18px #8b5cf633",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                cursor: "pointer",
+                outline: "none",
+                transition: "box-shadow .13s, transform .14s"
+              }}
+              className="module-card"
+            >
               <h2 style={{
                 color: "#FFD600",
                 fontSize: 23,
@@ -113,6 +127,11 @@ export default function LearnScreen() {
             max-width: 100vw !important; 
           }
           h1 { font-size: 26px !important; }
+        }
+        .module-card:focus, .module-card:hover {
+          box-shadow: 0 4px 23px #9149fc55;
+          transform: scale(1.032);
+          border-color: #FFD600;
         }
       `}</style>
     </div>

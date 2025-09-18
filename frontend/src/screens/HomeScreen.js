@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
+
 const user = {
   name: "Priya Mehra",
   points: 1230,
@@ -10,29 +11,7 @@ const user = {
   guardian: "/guardian-panda.png"
 };
 
-const quickActions = [
-  {
-    label: "Start a Quest",
-    desc: "Embark on safety scenarios and earn Aura Points.",
-    icon: "🛡️",
-    onClick: () => {},
-    color: "#6a49fe"
-  },
-  {
-    label: "Play Mini-Games",
-    desc: "Build skills through fun interactive games.",
-    icon: "🎮",
-    onClick: () => {},
-    color: "#3ca6fc"
-  },
-  {
-    label: "Learn & Grow",
-    desc: "Access expert safety knowledge and tips.",
-    icon: "📖",
-    onClick: () => {},
-    color: "#23dda3"
-  }
-];
+
 
 const daily = [
   { color: "#bb67f8", label: "Complete the \"Digital Guardian\" quest", points: 250 },
@@ -40,9 +19,31 @@ const daily = [
   { color: "#23dda3", label: "Score 80% in \"Spot the Risk\" game", points: 100 }
 ];
 
-export default function HomeScreen({ onHome, onProfile, onSOS }) {
+export default function HomeScreen({ onHome, onProfile, onSOS,onGames,onLearn,onQuests }) {
   const [checked, setChecked] = useState(Array(daily.length).fill(false));
-
+const quickActions = [
+  {
+    label: "Start a Quest",
+    desc: "Embark on safety scenarios and earn Aura Points.",
+    icon: "🛡️",
+    onClick:onQuests,
+    color: "#6a49fe"
+  },
+  {
+    label: "Play Mini-Games",
+    desc: "Build skills through fun interactive games.",
+    icon: "🎮",
+    onClick:onGames,
+    color: "#3ca6fc"
+  },
+  {
+    label: "Learn & Grow",
+    desc: "Access expert safety knowledge and tips.",
+    icon: "📖",
+    onClick:onLearn,
+    color: "#23dda3"
+  }
+];
   return (
     <>
       <Navbar
@@ -50,9 +51,9 @@ export default function HomeScreen({ onHome, onProfile, onSOS }) {
         user={user}
         onHome={onHome}
         onProfile={onProfile}
-        onQuests={() => alert("Quests!")}
-        onGames={() => alert("Games")}
-        onLearn={() => alert("Learn")}
+        onQuests={onQuests}
+        onGames={onGames}
+        onLearn={onLearn}
         onSOS={onSOS}
       />
       <div style={styles.bg}>
@@ -69,7 +70,9 @@ export default function HomeScreen({ onHome, onProfile, onSOS }) {
                   key={q.label}
                   style={{...styles.quickCard, borderColor: q.color}}
                   className="quickCardGlow"
+                  onClick={q.onClick}  
                 >
+                  
                   <div style={{...styles.quickIcon, background:q.color}}>{q.icon}</div>
                   <div style={styles.quickLabel}>{q.label}</div>
                   <div style={styles.quickDesc}>{q.desc}</div>

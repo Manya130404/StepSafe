@@ -1,0 +1,53 @@
+{
+  "intents": [
+    {
+      "patterns": ["hi", "hello", "hey", "good morning", "good evening", "good afternoon"],
+      "responses": [
+        "Hello! How can I help you stay safe today?",
+        "Hi there! Need any safety tips or support?"
+      ]
+    },
+    {
+      "patterns": ["help", "i need help", "can you help me", "emergency"],
+      "responses": [
+        "If this is an emergency, press the SOS button or call your local helpline. If you need information or someone to talk to, I'm here for you."
+      ]
+    },
+    {
+      "patterns": ["report abuse", "something happened", "violence", "threat"],
+      "responses": [
+        "I'm so sorry you're experiencing this. You can contact the National Helpline for Women at 181 in India. I'm here to listen—you're not alone."
+      ]
+    },
+    {
+      "patterns": ["i feel unsafe", "scared", "alone", "followed", "worried"],
+      "responses": [
+        "Let's make sure you're safe. Can you move to a well-lit, public area? Share your live location with a trusted contact. Breathe deeply—I'm right here with you. Need more tips?"
+      ]
+    },
+    {
+      "patterns": ["safety tips", "how to stay safe", "protect myself", "stay safe"],
+      "responses": [
+        "Always stay alert, trust your instincts, and let someone know your whereabouts. Keep emergency contacts handy and avoid isolated areas when possible. Want more detailed tips?"
+      ]
+    },
+    {
+      "patterns": ["helpline", "emergency contact", "police", "need number"],
+      "responses": [
+        "India National Emergency: 112 | Women's Helpline: 181 | Child Helpline: 1098 | Police: 100. Who would you like to reach?"
+      ]
+    },
+    {
+      "patterns": ["thanks", "thank you", "grateful"],
+      "responses": [
+        "You're welcome! Remember, your safety and well-being matter. Reach out anytime."
+      ]
+    },
+    {
+      "patterns": ["bye", "goodbye", "see you"],
+      "responses": [
+        "Take care! I'm always here if you need support or guidance."
+      ]
+    }
+  ]
+}

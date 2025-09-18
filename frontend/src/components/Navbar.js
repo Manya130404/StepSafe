@@ -60,7 +60,6 @@ export default function Navbar({ user = {
     transition: ".18s"
   };
 
-  // --- SIDEBAR layout for phones/tablet ---
   if (isMobile) {
     return (
       <>
@@ -122,6 +121,7 @@ export default function Navbar({ user = {
                 <Link to="/games"   style={path === "/games"   ? activeBox : navLink}   onClick={()=>setOpen(false)}>Games</Link>
                 <Link to="/learn"   style={path === "/learn"   ? activeBox : navLink}   onClick={()=>setOpen(false)}>Learn</Link>
                 <Link to="/sos"     style={sosSpecial}                                onClick={()=>setOpen(false)}>SOS</Link>
+                <Link to="/assistant" style={path === "/assistant" ? activeBox : navLink} onClick={()=>setOpen(false)}>Assistant</Link>
                 <Link to="/profile" style={path === "/profile" ? activeBox : navLink} onClick={()=>setOpen(false)}>Profile</Link>
               </nav>
             </aside>
@@ -131,7 +131,6 @@ export default function Navbar({ user = {
     );
   }
 
-  // --- DESKTOP layout ---
   return (
     <nav style={{
       display: 'flex',
@@ -155,6 +154,7 @@ export default function Navbar({ user = {
         <Link to="/games"   style={path === "/games"   ? activeBox : navLink}>Games</Link>
         <Link to="/learn"   style={path === "/learn"   ? activeBox : navLink}>Learn</Link>
         <Link to="/sos"     style={sosSpecial}>SOS</Link>
+        <Link to="/assistant" style={path === "/assistant" ? activeBox : navLink}>Assistant</Link>
         <Link to="/profile" style={path === "/profile" ? activeBox : navLink}>Profile</Link>
       </div>
       {/* User avatar/name */}
